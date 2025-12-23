@@ -1,3 +1,12 @@
+<!-- Makluman -->
+<div class="info-banner">
+  Sila baca makluman sebelum isi borang ini.
+</div>
+
+<!-- Borang -->
+<form id="borang-pendaftaran">
+  ...
+</form>
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -142,6 +151,134 @@
   </div>
 
 </div>
+
+</body>
+</html>
+
+
+
+<div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">No. Telefon<span class="required-star">*</span></label>
+            <input name="telefon" type="tel" class="form-control" placeholder="Contoh: 012-3456789" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">No. Fax</label>
+            <input name="fax" type="tel" class="form-control" placeholder="Contoh: 05-1234567">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Alamat E-mel<span class="required-star">*</span></label>
+          <input name="emel" type="email" class="form-control" placeholder="nama@syarikat.com" required>
+        </div>
+
+        <button class="btn btn-primary btn-submit w-100" type="submit" id="submitBtn">
+          <span id="btnText">Hantar Permohonan</span>
+          <span id="btnSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div id="successMsg" class="alert alert-success mt-4 d-none">
+        <strong>✓ Berjaya!</strong> Permohonan anda telah berjaya dihantar. Terima kasih.
+      </div>
+
+      <!-- Error Message -->
+      <div id="errorMsg" class="alert alert-danger mt-4 d-none">
+        <strong>✗ Ralat!</strong> <span id="errorText">Sila cuba lagi.</span>
+      </div>
+
+    </div>
+
+    <div class="footer-text">
+      <strong>Majlis Daerah Pengkalan Hulu</strong><br>
+      Hulu Perak, Perak Darul Ridzuan<br>
+      © 2024 Hak Cipta Terpelihara
+    </div>
+
+  </div>
+</div>
+
+<script>
+const form = document.getElementById("myForm");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
+const errorText = document.getElementById("errorText");
+const submitBtn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const btnSpinner = document.getElementById("btnSpinner");
+
+// REPLACE THIS WITH YOUR DEPLOYMENT URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYPNTz0STn_265Hr3qf6wL4Swe5darrU6eYd2itLaWnlYDbCdcBV9KebLyo5evyZCa/exec";
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const fileInput = document.getElementById("passport");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Sila muat naik gambar passport");
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert("Saiz fail terlalu besar. Maksimum 5MB.");
+    return;
+  }
+
+  // Show loading
+  submitBtn.disabled = true;
+  btnText.textContent = "Sedang menghantar...";
+  btnSpinner.classList.remove("d-none");
+  successMsg.classList.add("d-none");
+  errorMsg.classList.add("d-none");
+
+  try {
+    const base64Data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const formData = new FormData(form);
+    formData.append("passport", base64Data);
+    formData.append("fileName", file.name);
+    formData.append("mimeType", file.type);
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      form.reset();
+      successMsg.classList.remove("d-none");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      setTimeout(() => {
+        successMsg.classList.add("d-none");
+      }, 5000);
+    } else {
+      throw new Error(result.message  "Unknown error");
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    errorText.textContent = error.message  "Sila cuba lagi.";
+    errorMsg.classList.remove("d-none");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  } finally {
+    submitBtn.disabled = false;
+    btnText.textContent = "Hantar Permohonan";
+    btnSpinner.classList.add("d-none");
+  }
+});
+</script>
 
 </body>
 </html>
