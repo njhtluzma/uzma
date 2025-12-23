@@ -2,139 +2,197 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
+  <title>Pendaftaran Kontraktor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Pembekal - Majlis Daerah Pengkalan Hulu</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 20px; }
-    .main-card { max-width: 900px; margin: auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; }
-    
-    /* Header */
-    .header-section { background: #003d82; color: white; padding: 30px; text-align: center; }
-    .header-section h1 { font-weight: 700; }
-    .header-section p { font-size: 1.1rem; margin-top: 5px; }
-
-    /* Form */
-    .form-container { padding: 30px; }
-    .form-label { font-weight: 600; color: #003d82; }
-    .form-control { border-radius: 8px; border: 1px solid #ccc; }
-    .btn-submit { background: #003d82; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; }
-    .btn-submit:hover { background: #002855; }
-
-    /* Makluman modal */
-    .overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:999; }
-    .makluman-box { background:white; padding:30px; border-radius:10px; max-width:500px; text-align:center; box-shadow:0 5px 20px rgba(0,0,0,0.3);}
-    .makluman-box h3 { color: #003d82; font-weight: 700; margin-bottom: 15px; }
-    .makluman-box p { font-size: 1rem; color: #333; line-height: 1.5; }
-    .btn-next { background:#003d82; color:white; border:none; padding:10px 25px; border-radius:6px; font-weight:600; margin-top:20px; cursor:pointer; }
-    .btn-next:hover { background:#002855; }
-
-    /* Gold accent */
-    .gold-text { color: #d4af37; font-weight: 700; }
-
-    /* Section spacing */
-    .form-section { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #ccc; }
-  </style>
 </head>
+
 <body>
 
-<div class="main-card">
-
-  <!-- Header -->
-  <div class="header-section">
-    <h1>Pendaftaran Pembekal</h1>
-    <p class="gold-text">Majlis Daerah Pengkalan Hulu</p>
+<!-- ================= MAKLUMAN OVERLAY ================= -->
+<div id="maklumanOverlay" style="
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+">
+  <div style="
+    background:#fff;
+    padding:30px;
+    max-width:520px;
+    width:90%;
+    border-radius:10px;
+    text-align:center;
+  ">
+    <h3>Makluman Pendaftaran Kontraktor</h3>
+    <p>
+      Sebelum mengisi borang pendaftaran, sila pastikan semua maklumat
+      yang diberikan adalah tepat dan benar.
+      Pihak Majlis Daerah Pengkalan Hulu berhak menolak permohonan
+      sekiranya maklumat tidak lengkap atau tidak sah.
+    </p>
+    <button onclick="bukaBorang()" style="
+      margin-top:20px;
+      padding:10px 25px;
+      background:#003d82;
+      color:white;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+    ">
+      Seterusnya →
+    </button>
   </div>
+</div>
+<!-- =============== TAMAT MAKLUMAN ==================== -->
 
-  <!-- Makluman Modal -->
-  <div id="maklumanOverlay" class="overlay">
-    <div class="makluman-box">
-      <h3>Makluman Pendaftaran Kontraktor</h3>
-      <p>Sila baca maklumat ini sebelum mengisi borang pendaftaran. Semua maklumat yang anda isi adalah tepat dan benar. Pastikan dokumen sokongan lengkap sebelum hantar borang.</p>
-      <button class="btn-next" onclick="bukaBorang()">Seterusnya</button>
+
+<!-- ============== BORANG ASAL AWAK =================== -->
+<div id="borang">
+
+<div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">No. Telefon<span class="required-star">*</span></label>
+            <input name="telefon" type="tel" class="form-control" placeholder="Contoh: 012-3456789" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">No. Fax</label>
+            <input name="fax" type="tel" class="form-control" placeholder="Contoh: 05-1234567">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Alamat E-mel<span class="required-star">*</span></label>
+          <input name="emel" type="email" class="form-control" placeholder="nama@syarikat.com" required>
+        </div>
+
+        <button class="btn btn-primary btn-submit w-100" type="submit" id="submitBtn">
+          <span id="btnText">Hantar Permohonan</span>
+          <span id="btnSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div id="successMsg" class="alert alert-success mt-4 d-none">
+        <strong>✓ Berjaya!</strong> Permohonan anda telah berjaya dihantar. Terima kasih.
+      </div>
+
+      <!-- Error Message -->
+      <div id="errorMsg" class="alert alert-danger mt-4 d-none">
+        <strong>✗ Ralat!</strong> <span id="errorText">Sila cuba lagi.</span>
+      </div>
+
     </div>
+
+    <div class="footer-text">
+      <strong>Majlis Daerah Pengkalan Hulu</strong><br>
+      Hulu Perak, Perak Darul Ridzuan<br>
+      © 2024 Hak Cipta Terpelihara
+    </div>
+
   </div>
-
-  <!-- Borang -->
-  <div id="borang" class="form-container" style="display:none;">
-    <form>
-
-      <!-- Bahagian 1: Maklumat Syarikat -->
-      <div class="form-section">
-        <h4 class="gold-text mb-3">Maklumat Syarikat</h4>
-        <div class="mb-3">
-          <label class="form-label">Nama Syarikat <span style="color:red">*</span></label>
-          <input type="text" class="form-control" placeholder="Contoh: Syarikat XYZ Sdn Bhd" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">No. Telefon <span style="color:red">*</span></label>
-          <input type="text" class="form-control" placeholder="012-3456789" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Alamat Syarikat</label>
-          <textarea class="form-control" rows="3" placeholder="Masukkan alamat penuh"></textarea>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Kategori Pendaftaran</label>
-          <select class="form-control">
-            <option value="">Sila pilih kategori</option>
-            <option value="kontraktor">Kontraktor</option>
-            <option value="pembekal">Pembekal</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Bahagian 2: Maklumat Wakil -->
-      <div class="form-section">
-        <h4 class="gold-text mb-3">Maklumat Wakil Syarikat</h4>
-        <div class="mb-3">
-          <label class="form-label">Nama Wakil <span style="color:red">*</span></label>
-          <input type="text" class="form-control" placeholder="Nama penuh wakil" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">No. Kad Pengenalan</label>
-          <input type="text" class="form-control" placeholder="Contoh: 990101-01-1234">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Jawatan</label>
-          <input type="text" class="form-control" placeholder="Contoh: Pengurus Projek">
-        </div>
-      </div>
-
-      <!-- Bahagian 3: Dokumen Sokongan -->
-      <div class="form-section">
-        <h4 class="gold-text mb-3">Dokumen Sokongan</h4>
-        <div class="mb-3">
-          <label class="form-label">Sijil Pendaftaran Syarikat</label>
-          <input type="file" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Salinan IC Wakil</label>
-          <input type="file" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Lain-lain Dokumen</label>
-          <input type="file" class="form-control">
-        </div>
-      </div>
-
-      <button type="submit" class="btn-submit">Hantar</button>
-    </form>
-  </div>
-
 </div>
 
 <script>
-  function bukaBorang() {
-    document.getElementById('maklumanOverlay').style.display = 'none';
-    document.getElementById('borang').style.display = 'block';
-    localStorage.setItem('maklumanRead','true');
+const form = document.getElementById("myForm");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
+const errorText = document.getElementById("errorText");
+const submitBtn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const btnSpinner = document.getElementById("btnSpinner");
+
+// REPLACE THIS WITH YOUR DEPLOYMENT URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYPNTz0STn_265Hr3qf6wL4Swe5darrU6eYd2itLaWnlYDbCdcBV9KebLyo5evyZCa/exec";
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const fileInput = document.getElementById("passport");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Sila muat naik gambar passport");
+    return;
   }
 
-  // Jika user pernah lihat makluman sebelum ini, terus tunjuk borang
-  if(localStorage.getItem('maklumanRead') === 'true') {
-    document.getElementById('maklumanOverlay').style.display = 'none';
-    document.getElementById('borang').style.display = 'block';
+  if (file.size > 5 * 1024 * 1024) {
+    alert("Saiz fail terlalu besar. Maksimum 5MB.");
+    return;
+  }
+
+  // Show loading
+  submitBtn.disabled = true;
+  btnText.textContent = "Sedang menghantar...";
+  btnSpinner.classList.remove("d-none");
+  successMsg.classList.add("d-none");
+  errorMsg.classList.add("d-none");
+
+  try {
+    const base64Data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const formData = new FormData(form);
+    formData.append("passport", base64Data);
+    formData.append("fileName", file.name);
+    formData.append("mimeType", file.type);
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      form.reset();
+      successMsg.classList.remove("d-none");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      setTimeout(() => {
+        successMsg.classList.add("d-none");
+      }, 5000);
+    } else {
+      throw new Error(result.message  "Unknown error");
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    errorText.textContent = error.message  "Sila cuba lagi.";
+    errorMsg.classList.remove("d-none");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  } finally {
+    submitBtn.disabled = false;
+    btnText.textContent = "Hantar Permohonan";
+    btnSpinner.classList.add("d-none");
+  }
+});
+</script>
+
+</body>
+</html>
+
+</div>
+<!-- ============ TAMAT BORANG ASAL =================== -->
+
+
+<script>
+  // Sembunyikan borang masa mula load
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("borang").style.display = "none";
+  });
+
+  // Bila klik seterusnya
+  function bukaBorang(){
+    document.getElementById("maklumanOverlay").style.display = "none";
+    document.getElementById("borang").style.display = "block";
   }
 </script>
 
