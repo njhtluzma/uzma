@@ -471,53 +471,84 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
           </svg>
-          Maklumat Pengarah / Pemilik
-        </div>
+          <!-- Bahagian 4: Maklumat Pengarah / Pemilik -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
+  </svg>
+  Maklumat Pengarah / Pemilik
+</div>
 
-        <div class="mb-3">
-          <label class="form-label">Nama<span class="required-star">*</span></label>
-          <input name="nama_syarikat" class="form-control" placeholder="Contoh: ABC Sdn Bhd" required>
-        </div>
+<div id="pengarahContainer">
 
-        <div class="mb-3">
-          <label class="form-label">No.KP<span class="required-star">*</span></label>
-          <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
-        </div>
+  <!-- Pengarah Item -->
+  <div class="pengarah-item border rounded p-3 mb-3">
 
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Alamat<span class="required-star">*</span></label>
-            <input name="bandar" class="form-control" placeholder="Contoh: Pengkalan Hulu" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Negeri<span class="required-star">*</span></label>
-            <select name="negeri" class="form-select" required>
-              <option value="">-- Sila Pilih --</option>
-              <option>Johor</option>
-              <option>Kedah</option>
-              <option>Kelantan</option>
-              <option>Melaka</option>
-              <option>Negeri Sembilan</option>
-              <option>Pahang</option>
-              <option>Perak</option>
-              <option>Perlis</option>
-              <option>Pulau Pinang</option>
-              <option>Sabah</option>
-              <option>Sarawak</option>
-              <option>Selangor</option>
-              <option>Terengganu</option>
-              <option>WP Kuala Lumpur</option>
-              <option>WP Labuan</option>
-              <option>WP Putrajaya</option>
-            </select>
-          </div>
-        <div class="mb-3">
-          <label class="form-label">Bandar<span class="required-star">*</span></label>
-          <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
-        </div>
-		div class="mb-3">
-          <label class="form-label">Poskod<span class="required-star">*</span></label>
-          <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Nama<span class="required-star">*</span></label>
+        <input name="pengarah_nama[]" class="form-control" required>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">No. Kad Pengenalan<span class="required-star">*</span></label>
+        <input name="pengarah_kp[]" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Alamat<span class="required-star">*</span></label>
+      <textarea name="pengarah_alamat[]" class="form-control" rows="2" required></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Bandar<span class="required-star">*</span></label>
+        <input name="pengarah_bandar[]" class="form-control" required>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Negeri<span class="required-star">*</span></label>
+        <select name="pengarah_negeri[]" class="form-select" required>
+          <option value="">-- Sila Pilih --</option>
+          <option>Johor</option>
+          <option>Kedah</option>
+          <option>Kelantan</option>
+          <option>Melaka</option>
+          <option>Negeri Sembilan</option>
+          <option>Pahang</option>
+          <option>Perak</option>
+          <option>Perlis</option>
+          <option>Pulau Pinang</option>
+          <option>Sabah</option>
+          <option>Sarawak</option>
+          <option>Selangor</option>
+          <option>Terengganu</option>
+          <option>WP Kuala Lumpur</option>
+          <option>WP Labuan</option>
+          <option>WP Putrajaya</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Poskod<span class="required-star">*</span></label>
+        <input name="pengarah_poskod[]" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button type="button" class="btn btn-outline-danger btn-sm" onclick="removePengarah(this)">
+        ❌ Buang
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<button type="button" class="btn btn-outline-primary" onclick="addPengarah()">
+  ➕ Tambah Pengarah / Pemilik
+</button>
+t" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
         </div>
 		
         <button class="btn btn-primary btn-submit w-100" type="submit" id="submitBtn">
