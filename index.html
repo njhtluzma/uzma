@@ -2,577 +2,164 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Pembekal - Majlis Daerah Pengkalan Hulu</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Pendaftaran Kontraktor Awam 2025</title>
   <style>
-    :root {
-      --primary-blue: #003d82;
-      --secondary-gold: #c9b037;
-      --dark-blue: #002855;
-      --light-gray: #f8f9fa;
-      --border-color: #dee2e6;
-    }
-
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      color: #000;
     }
-
-    .header-section {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-      color: white;
-      padding: 30px;
-      border-radius: 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 300px;
-      height: 300px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 50%;
-    }
-
-    .header-section::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -5%;
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 50%;
-    }
-
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .logo-placeholder {
-      width: 80px;
-      height: 80px;
-      background: white;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    .logo-placeholder svg {
-      width: 50px;
-      height: 50px;
-      fill: var(--primary-blue);
-    }
-
-    .header-title {
-      flex: 1;
-    }
-
-    .header-title h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .header-title p {
-      margin: 5px 0 0 0;
-      opacity: 0.95;
-      font-size: 0.95rem;
-    }
-
-    .main-card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-      overflow: hidden;
-    }
-
-    .form-container {
-      padding: 40px;
-    }
-
-    .section-title {
-      color: var(--primary-blue);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 30px 0 20px 0;
-      padding-bottom: 10px;
-      border-bottom: 3px solid var(--secondary-gold);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title:first-child {
-      margin-top: 0;
-    }
-
-    .section-title svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--secondary-gold);
-    }
-
-    .form-label {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-
-    .form-control, .form-select {
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 12px 15px;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-    }
-
-    .form-control:focus, .form-select:focus {
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 0 0.2rem rgba(0, 61, 130, 0.15);
-    }
-
-    .form-check {
-      padding: 10px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-
-    .form-check:hover {
-      background: #f8f9fa;
-    }
-
-    .form-check-input {
-      width: 20px;
-      height: 20px;
-      margin-top: 2px;
-      cursor: pointer;
-      border: 2px solid #ccc;
-    }
-
-    .form-check-input:checked {
-      background-color: var(--primary-blue);
-      border-color: var(--primary-blue);
-    }
-
-    .form-check-label {
-      cursor: pointer;
-      margin-left: 8px;
-      font-size: 0.95rem;
-    }
-
-    .required-star {
-      color: #dc3545;
-      margin-left: 3px;
-    }
-
-    .btn-submit {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-      border: none;
-      padding: 15px 40px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 61, 130, 0.3);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 61, 130, 0.4);
-      background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-    }
-
-    .btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .alert {
-      border-radius: 10px;
-      border: none;
-      padding: 20px;
-      font-weight: 500;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .alert-success {
-      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-      color: white;
-    }
-
-    .alert-danger {
-      background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-      color: white;
-    }
-
-    .file-upload-wrapper {
-      position: relative;
-    }
-
-    .file-upload-wrapper input[type="file"] {
-      cursor: pointer;
-    }
-
-    .file-upload-wrapper input[type="file"]::file-selector-button {
-      background: var(--primary-blue);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-right: 15px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .file-upload-wrapper input[type="file"]::file-selector-button:hover {
-      background: var(--dark-blue);
-    }
-
-    .info-banner {
-      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-      border-left: 4px solid var(--primary-blue);
-      padding: 15px 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      font-size: 0.9rem;
-      color: #1976d2;
-    }
-
-    .footer-text {
+    .center {
       text-align: center;
-      padding: 20px;
-      color: #666;
-      font-size: 0.85rem;
-      background: #f8f9fa;
-      border-radius: 0;
     }
-
-    @media (max-width: 768px) {
-      .form-container {
-        padding: 25px;
-      }
-
-      .header-section {
-        padding: 20px;
-      }
-
-      .header-title h1 {
-        font-size: 1.4rem;
-      }
-
-      .logo-section {
-        flex-direction: column;
-        text-align: center;
-      }
+    h1, h2, h3 {
+      margin: 5px 0;
     }
-
-    .spinner-border-sm {
-      width: 1.2rem;
-      height: 1.2rem;
-      border-width: 0.2em;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #000;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    td.left {
+      text-align: left;
+    }
+    ol {
+      margin-left: 20px;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: right;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-<div class="container" style="max-width: 900px;">
-  <div class="main-card">
-    
-    <!-- Header Section -->
-    <div class="header-section">
-      <div class="logo-section">
-        <div class="logo-placeholder">
-          <!-- GANTI DENGAN BASE64 CODE LOGO MDPH ANDA -->
-          <!-- Contoh: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA... -->
-          <img src="data:image/png;base64,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" alt="Logo MDPH" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
-        </div>
-        <div class="header-title">
-          <h1>MAJLIS DAERAH PENGKALAN HULU</h1>
-          <p>Sistem Pendaftaran Pembekal & Kontraktor</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Form Section -->
-    <div class="form-container">
-      
-      <div class="info-banner">
-        <strong>📋 Perhatian:</strong> Sila isi semua maklumat dengan lengkap dan tepat. Pastikan dokumen yang dimuat naik adalah sah dan jelas.
-      </div>
-
-      <form id="myForm">
-
-        <!-- Bahagian 1: Jenis Pendaftaran -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-          </svg>
-          Maklumat Pendaftaran
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Jenis Pendaftaran<span class="required-star">*</span></label>
-          <select name="pendaftaran" class="form-select" required>
-            <option value="">-- Sila Pilih --</option>
-            <option>Pendaftaran Baru</option>
-            <option>Pendaftaran Semula</option>
-            <option>Kemaskini Maklumat</option>
-          </select>
-        </div>
-
-        <div class="mb-4 file-upload-wrapper">
-          <label class="form-label">Muat Naik Gambar Passport<span class="required-star">*</span></label>
-          <input type="file" id="passport" accept="image/*" class="form-control" required>
-          <small class="text-muted">Format: JPG, PNG | Maksimum: 5MB</small>
-        </div>
-
-        <!-- Bahagian 2: Maklumat Perniagaan -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
-          </svg>
-          Maklumat Perniagaan
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Jenis Perniagaan<span class="required-star">*</span></label>
-          <select name="jenis_perniagaan" class="form-select" required>
-            <option value="">-- Sila Pilih --</option>
-            <option>Bekalan</option>
-            <option>Perkhidmatan</option>
-            <option>Kerja</option>
-            <option>Perunding</option>
-          </select>
-        </div>
-
-        <div class="mb-4">
-          <label class="form-label">Jenis Sijil yang Dimiliki</label>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="jenis_sijil" value="SSM" id="sijil1">
-            <label class="form-check-label" for="sijil1">
-              Suruhanjaya Syarikat Malaysia (SSM)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="jenis_sijil" value="CIDB" id="sijil2">
-            <label class="form-check-label" for="sijil2">
-              Construction Industry Development Board (CIDB)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="jenis_sijil" value="MOF" id="sijil3">
-            <label class="form-check-label" for="sijil3">
-              Ministry of Finance (MOF)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="jenis_sijil" value="PKK" id="sijil4">
-            <label class="form-check-label" for="sijil4">
-              Pusat Khidmat Kontraktor (PKK)
-            </label>
-          </div>
-        </div>
-
-        <!-- Bahagian 3: Butiran Syarikat -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
-          </svg>
-          Butiran Syarikat
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Nama Syarikat<span class="required-star">*</span></label>
-          <input name="nama_syarikat" class="form-control" placeholder="Contoh: ABC Sdn Bhd" required>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Alamat Syarikat<span class="required-star">*</span></label>
-          <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Bandar<span class="required-star">*</span></label>
-            <input name="bandar" class="form-control" placeholder="Contoh: Pengkalan Hulu" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Negeri<span class="required-star">*</span></label>
-            <select name="negeri" class="form-select" required>
-              <option value="">-- Sila Pilih --</option>
-              <option>Johor</option>
-              <option>Kedah</option>
-              <option>Kelantan</option>
-              <option>Melaka</option>
-              <option>Negeri Sembilan</option>
-              <option>Pahang</option>
-              <option>Perak</option>
-              <option>Perlis</option>
-              <option>Pulau Pinang</option>
-              <option>Sabah</option>
-              <option>Sarawak</option>
-              <option>Selangor</option>
-              <option>Terengganu</option>
-              <option>WP Kuala Lumpur</option>
-              <option>WP Labuan</option>
-              <option>WP Putrajaya</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Bahagian 4: Maklumat Perhubungan -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-          Maklumat Perhubungan
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">No. Telefon<span class="required-star">*</span></label>
-            <input name="telefon" type="tel" class="form-control" placeholder="Contoh: 012-3456789" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">No. Fax</label>
-            <input name="fax" type="tel" class="form-control" placeholder="Contoh: 05-1234567">
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="form-label">Alamat E-mel<span class="required-star">*</span></label>
-          <input name="emel" type="email" class="form-control" placeholder="nama@syarikat.com" required>
-        </div>
-
-        <button class="btn btn-primary btn-submit w-100" type="submit" id="submitBtn">
-          <span id="btnText">Hantar Permohonan</span>
-          <span id="btnSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
-        </button>
-      </form>
-
-      <!-- Success Message -->
-      <div id="successMsg" class="alert alert-success mt-4 d-none">
-        <strong>✓ Berjaya!</strong> Permohonan anda telah berjaya dihantar. Terima kasih.
-      </div>
-
-      <!-- Error Message -->
-      <div id="errorMsg" class="alert alert-danger mt-4 d-none">
-        <strong>✗ Ralat!</strong> <span id="errorText">Sila cuba lagi.</span>
-      </div>
-
-    </div>
-
-    <div class="footer-text">
-      <strong>Majlis Daerah Pengkalan Hulu</strong><br>
-      Hulu Perak, Perak Darul Ridzuan<br>
-      © 2024 Hak Cipta Terpelihara
-    </div>
-
+  <div class="center">
+    <p>مجلس دائرة ڤڠكالن هولو</p>
+    <h2>MAJLIS DAERAH PENGKALAN HULU</h2>
+    <p>
+      Wisma Kroh, Jalan Sri Adika Raja<br>
+      33100 Pengkalan Hulu<br>
+      PERAK DARUL RIDZUAN
+    </p>
   </div>
-</div>
 
-<script>
-const form = document.getElementById("myForm");
-const successMsg = document.getElementById("successMsg");
-const errorMsg = document.getElementById("errorMsg");
-const errorText = document.getElementById("errorText");
-const submitBtn = document.getElementById("submitBtn");
-const btnText = document.getElementById("btnText");
-const btnSpinner = document.getElementById("btnSpinner");
+  <hr>
 
-// REPLACE THIS WITH YOUR DEPLOYMENT URL
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYPNTz0STn_265Hr3qf6wL4Swe5darrU6eYd2itLaWnlYDbCdcBV9KebLyo5evyZCa/exec";
+  <div class="center">
+    <h3>PENDAFTARAN KONTRAKTOR AWAM</h3>
+    <h3>BANGUNAN BAGI TAHUN 2025</h3>
+  </div>
+  
+  <hr>
 
-form.addEventListener("submit", async function(e) {
-  e.preventDefault();
+  <p>
+    Adalah dipelawa kontraktor-kontraktor <strong>BUMIPUTERA</strong> yang berdaftar
+    dengan Lembaga Pembangunan Industri Pembinaan (CIDB) dan Pusat Khidmat
+    Kontraktor (PKK) dalam kelas dan jenis pendaftaran yang berkaitan dan yang
+    masih membuat tawaran buat masa ini untuk berdaftar dengan Majlis Daerah
+    Pengkalan Hulu untuk tempoh <strong>6 Januari 2025 HINGGA 30 Jun 2025</strong>.
+  </p>
 
-  const fileInput = document.getElementById("passport");
-  const file = fileInput.files[0];
+  <table>
+    <tr>
+      <th>BIL</th>
+      <th>PERKARA</th>
+      <th>KELAS</th>
+      <th>HARGA</th>
+    </tr>
+    <tr>
+      <td rowspan="5">1.</td>
+      <td rowspan="5" class="left">PENDAFTARAN KONTRAKTOR</td>
+      <td>GRED G1</td>
+      <td>RM 50.00</td>
+    </tr>
+    <tr>
+      <td>GRED G2</td>
+      <td>RM 75.00</td>
+    </tr>
+    <tr>
+      <td>GRED G3</td>
+      <td>RM 100.00</td>
+    </tr>
+    <tr>
+      <td>GRED G4 / G5</td>
+      <td>RM 150.00</td>
+    </tr>
+    <tr>
+      <td>GRED G6 / G7</td>
+      <td>RM 250.00</td>
+    </tr>
+  </table>
 
-  if (!file) {
-    alert("Sila muat naik gambar passport");
-    return;
-  }
+  <ol>
+    <li>
+      Untuk maksud ini kontraktor-kontraktor yang ingin membuat
+      pendaftaran <strong> DIWAJIBKAN</strong> membawa:
+      <ol type="I">
+        <li>Perakuan Pendaftaran Atau Kad Perakuan Permohonan Pendaftaran Lembaga Pembangunan Industri Pembinaan Malaysia (CIDB).</li>
+        <li>Sijil Pendaftar Asal Pusat Khidmat Kontraktor (PKK).</li>
+        <li>Sijil Pengiktirafan Taraf Bumiputera.</li>
+        <li>Sijil Suruhanjaya Syarikat Malaysia (SSM).</li>
+        <li>Sijil Pendaftaran Kementerian Kewangan. (Jika Ada)</li>
+        <li>Lain-Lain Sijil.</li>
+        <li>Gambar Pemilik Berukuran Passport.</li>
+        <li>Cop Rasmi Syarikat.</li>
+      </ol>
+      <p>
+        Salinan-salinan perakuan dan sijil yang berkenaan boleh diterima jika
+        disahkan oleh pejabat yang mengeluarkannya dan sijil dari Majlis Daerah
+        Pengkalan Hulu.
+      </p>
+    </li>
 
-  if (file.size > 5 * 1024 * 1024) {
-    alert("Saiz fail terlalu besar. Maksimum 5MB.");
-    return;
-  }
+    <li>
+      Pendaftaran boleh dibuat jam <strong>8.00 pagi hingga 4.00 petang</strong>
+      dan pada hari jumaat jam <strong>8.00 pagi hingga 3.30 petang</strong>
+      semasa waktu pejabat di kaunter Jabatan Kejuruteraan
+      Majlis Daerah Pengkalan Hulu.
+    </li>
 
-  // Show loading
-  submitBtn.disabled = true;
-  btnText.textContent = "Sedang menghantar...";
-  btnSpinner.classList.remove("d-none");
-  successMsg.classList.add("d-none");
-  errorMsg.classList.add("d-none");
+    <li>
+      Bayaran bagi pendaftaran tersebut hendaklah dibuat dalam Ringgit Malaysia
+      dan <strong>dalam bentuk Pembayaran atas talian sahaja</strong>
+    </li>
 
-  try {
-    const base64Data = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(",")[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+    <li>
+      Sebarang rayuan untuk mendaftar selepas daripada tempoh tersebut
+      tidak akan dilayan.
+    </li>
 
-    const formData = new FormData(form);
-    formData.append("passport", base64Data);
-    formData.append("fileName", file.name);
-    formData.append("mimeType", file.type);
+    <li>
+      Hanya kontraktor yang berdaftar sahaja akan diberikan pertimbangan
+      ke atas pemberian kerja-kerja sebut harga dan kerja-kerja kecil
+      yang dikeluarkan oleh majlis.
+    </li>
 
-    const response = await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    });
+    <li>
+      Sebarang permohonan yang tidak mengikut kriteria yang dikehendaki /
+      tidak lengkap akan mengakibatkan pendaftaran tuan/puan akan ditolak.
+    </li>
+  </ol>
 
-    const result = await response.json();
-
-    if (result.status === "success") {
-      form.reset();
-      successMsg.classList.remove("d-none");
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-      setTimeout(() => {
-        successMsg.classList.add("d-none");
-      }, 5000);
-    } else {
-      throw new Error(result.message || "Unknown error");
-    }
-
-  } catch (error) {
-    console.error("Error:", error);
-    errorText.textContent = error.message || "Sila cuba lagi.";
-    errorMsg.classList.remove("d-none");
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  } finally {
-    submitBtn.disabled = false;
-    btnText.textContent = "Hantar Permohonan";
-    btnSpinner.classList.add("d-none");
-  }
-});
-</script>
+  <div class="footer">
+    ARAHAN<br>
+    YANG DIPERTUA<br>
+    MAJLIS DAERAH PENGKALAN HULU
+  </div>
+  
+ <p>
+	<a href="page2.html">Seterusnya</a>
+ </p>
 
 </body>
 </html>
