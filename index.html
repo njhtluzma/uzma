@@ -339,6 +339,7 @@
             <option value="">-- Sila Pilih --</option>
             <option>Pendaftaran Baru</option>
             <option>Pendaftaran Semula</option>
+            <option>Kemaskini Maklumat</option>
           </select>
         </div>
 
@@ -447,7 +448,7 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
-     
+          Maklumat Perhubungan
         </div>
 
         <div class="row">
@@ -466,91 +467,6 @@
           <input name="emel" type="email" class="form-control" placeholder="nama@syarikat.com" required>
         </div>
 
-<!-- Bahagian 4: Maklumat Pengarah / Pemilik -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
-          </svg>
-          <!-- Bahagian 4: Maklumat Pengarah / Pemilik -->
-<div class="section-title">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
-  </svg>
-  Maklumat Pengarah / Pemilik
-</div>
-
-<div id="pengarahContainer">
-
-  <!-- Pengarah Item -->
-  <div class="pengarah-item border rounded p-3 mb-3">
-
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Nama<span class="required-star">*</span></label>
-        <input name="pengarah_nama[]" class="form-control" required>
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label class="form-label">No. Kad Pengenalan<span class="required-star">*</span></label>
-        <input name="pengarah_kp[]" class="form-control" required>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Alamat<span class="required-star">*</span></label>
-      <textarea name="pengarah_alamat[]" class="form-control" rows="2" required></textarea>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <label class="form-label">Bandar<span class="required-star">*</span></label>
-        <input name="pengarah_bandar[]" class="form-control" required>
-      </div>
-
-      <div class="col-md-4 mb-3">
-        <label class="form-label">Negeri<span class="required-star">*</span></label>
-        <select name="pengarah_negeri[]" class="form-select" required>
-          <option value="">-- Sila Pilih --</option>
-          <option>Johor</option>
-          <option>Kedah</option>
-          <option>Kelantan</option>
-          <option>Melaka</option>
-          <option>Negeri Sembilan</option>
-          <option>Pahang</option>
-          <option>Perak</option>
-          <option>Perlis</option>
-          <option>Pulau Pinang</option>
-          <option>Sabah</option>
-          <option>Sarawak</option>
-          <option>Selangor</option>
-          <option>Terengganu</option>
-          <option>WP Kuala Lumpur</option>
-          <option>WP Labuan</option>
-          <option>WP Putrajaya</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 mb-3">
-        <label class="form-label">Poskod<span class="required-star">*</span></label>
-        <input name="pengarah_poskod[]" class="form-control" required>
-      </div>
-    </div>
-
-    <div class="text-end">
-      <button type="button" class="btn btn-outline-danger btn-sm" onclick="removePengarah(this)">
-        ❌ Buang
-      </button>
-    </div>
-
-  </div>
-</div>
-
-<button type="button" class="btn btn-outline-primary" onclick="addPengarah()">
-  ➕ Tambah Pengarah / Pemilik
-</button>
-t" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" required></textarea>
-        </div>
-		
         <button class="btn btn-primary btn-submit w-100" type="submit" id="submitBtn">
           <span id="btnText">Hantar Permohonan</span>
           <span id="btnSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
@@ -575,3 +491,88 @@ t" class="form-control" rows="3" placeholder="Masukkan alamat lengkap syarikat" 
       © 2024 Hak Cipta Terpelihara
     </div>
 
+  </div>
+</div>
+
+<script>
+const form = document.getElementById("myForm");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
+const errorText = document.getElementById("errorText");
+const submitBtn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const btnSpinner = document.getElementById("btnSpinner");
+
+// REPLACE THIS WITH YOUR DEPLOYMENT URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYPNTz0STn_265Hr3qf6wL4Swe5darrU6eYd2itLaWnlYDbCdcBV9KebLyo5evyZCa/exec";
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const fileInput = document.getElementById("passport");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Sila muat naik gambar passport");
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert("Saiz fail terlalu besar. Maksimum 5MB.");
+    return;
+  }
+
+  // Show loading
+  submitBtn.disabled = true;
+  btnText.textContent = "Sedang menghantar...";
+  btnSpinner.classList.remove("d-none");
+  successMsg.classList.add("d-none");
+  errorMsg.classList.add("d-none");
+
+  try {
+    const base64Data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const formData = new FormData(form);
+    formData.append("passport", base64Data);
+    formData.append("fileName", file.name);
+    formData.append("mimeType", file.type);
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      form.reset();
+      successMsg.classList.remove("d-none");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      setTimeout(() => {
+        successMsg.classList.add("d-none");
+      }, 5000);
+    } else {
+      throw new Error(result.message || "Unknown error");
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    errorText.textContent = error.message || "Sila cuba lagi.";
+    errorMsg.classList.remove("d-none");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  } finally {
+    submitBtn.disabled = false;
+    btnText.textContent = "Hantar Permohonan";
+    btnSpinner.classList.add("d-none");
+  }
+});
+</script>
+
+</body>
+</html>
