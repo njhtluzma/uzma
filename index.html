@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pendaftaran Kontraktor Awam 2025</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -12,275 +14,474 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
       min-height: 100vh;
       padding: 20px;
-      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 30px;
+      padding: 50px 40px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      position: relative;
       overflow: hidden;
     }
 
-    .header {
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      color: white;
-      padding: 40px 30px;
-      text-align: center;
+    .header-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      animation: shimmer 3s linear infinite;
     }
 
-    .header .arabic {
-      font-size: 18px;
-      margin-bottom: 10px;
-      opacity: 0.9;
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
     }
 
-    .header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin: 15px 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .header .address {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-top: 15px;
-      line-height: 1.8;
-    }
-
-    .banner {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: white;
-      padding: 30px;
-      text-align: center;
-    }
-
-    .banner h2 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-    }
-
-    .banner h3 {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .content {
-      padding: 40px;
-    }
-
-    .intro {
-      background: #f8f9fa;
-      padding: 25px;
-      border-radius: 12px;
+    .logo-container {
+      display: flex;
+      justify-content: center;
       margin-bottom: 30px;
-      border-left: 5px solid #667eea;
+      position: relative;
     }
 
-    .intro p {
+    .logo-wrapper {
+      position: relative;
+      width: 150px;
+      height: 150px;
+    }
+
+    .logo-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+      position: relative;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 20px 50px rgba(102, 126, 234, 0.7); }
+    }
+
+    .logo-circle::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+      z-index: -1;
+      opacity: 0.3;
+      animation: rotate 4s linear infinite;
+    }
+
+    .logo-inner {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-inner img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .header-text {
+      text-align: center;
+    }
+
+    .arabic-text {
+      font-size: 20px;
+      color: #667eea;
+      margin-bottom: 15px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .main-title {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .address {
+      font-size: 15px;
+      color: #5a6c7d;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .banner-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      border-radius: 30px;
+      padding: 40px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    .banner-title {
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .banner-subtitle {
+      font-size: 22px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 30px;
+      padding: 50px 40px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .intro-box {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .intro-box p {
       font-size: 16px;
-      color: #333;
+      color: #2c3e50;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
     }
 
-    .intro strong {
+    .highlight {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #856404;
+      display: inline-block;
+      box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+    }
+
+    .strong-text {
       color: #667eea;
       font-weight: 700;
     }
 
-    .date-highlight {
-      background: #fff3cd;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-weight: bold;
-      color: #856404;
+    .table-container {
+      margin: 40px 0;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
 
     .price-table {
       width: 100%;
-      margin: 30px 0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-collapse: collapse;
     }
 
     .price-table thead {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
     }
 
     .price-table th {
-      padding: 18px;
-      font-weight: 600;
+      padding: 20px;
+      color: white;
+      font-weight: 700;
       text-transform: uppercase;
       font-size: 14px;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      text-align: left;
     }
 
-    .price-table td {
-      padding: 18px;
-      border-bottom: 1px solid #e9ecef;
+    .price-table tbody tr {
+      background: white;
+      transition: all 0.3s ease;
     }
 
     .price-table tbody tr:hover {
-      background: #f8f9fa;
-      transition: background 0.3s;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      transform: translateX(5px);
     }
 
-    .price-table .grade {
-      font-weight: 600;
-      color: #667eea;
+    .price-table td {
+      padding: 20px;
+      border-bottom: 1px solid #e9ecef;
+      color: #2c3e50;
     }
 
-    .price-table .price {
+    .grade-cell {
       font-weight: 700;
-      color: #2a5298;
-      font-size: 18px;
+      color: #667eea;
+      font-size: 16px;
     }
 
-    .requirements {
-      margin: 30px 0;
+    .price-cell {
+      font-weight: 800;
+      color: #764ba2;
+      font-size: 20px;
     }
 
-    .requirement-item {
+    .requirement-section {
+      margin: 40px 0;
+    }
+
+    .requirement-card {
       background: white;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 25px;
+      border-radius: 20px;
       border: 2px solid #e9ecef;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .requirement-item:hover {
+    .requirement-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+    }
+
+    .requirement-card:hover {
       border-color: #667eea;
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .requirement-card:hover::before {
+      width: 6px;
+    }
+
+    .requirement-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .requirement-number {
-      display: inline-block;
+      min-width: 50px;
+      height: 50px;
+      border-radius: 15px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 35px;
-      font-weight: bold;
-      margin-right: 15px;
-      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
 
     .requirement-content {
-      display: inline-block;
-      vertical-align: top;
-      width: calc(100% - 60px);
+      flex: 1;
+    }
+
+    .requirement-content p {
+      font-size: 16px;
+      color: #2c3e50;
+      line-height: 1.8;
+      margin-bottom: 15px;
     }
 
     .doc-list {
-      background: #f8f9fa;
-      padding: 20px;
-      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      padding: 25px;
+      border-radius: 15px;
       margin-top: 15px;
     }
 
     .doc-item {
-      padding: 10px 0;
-      padding-left: 25px;
+      padding: 12px 0 12px 35px;
       position: relative;
-      color: #495057;
+      color: #2c3e50;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
-    .doc-item:before {
+    .doc-item::before {
       content: "✓";
       position: absolute;
       left: 0;
       color: #28a745;
-      font-weight: bold;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 20px;
     }
 
-    .note {
-      background: #e7f3ff;
-      padding: 15px;
-      border-radius: 8px;
+    .note-box {
+      background: linear-gradient(135deg, #e7f3ff 0%, #cfe9ff 100%);
+      padding: 20px;
+      border-radius: 15px;
       margin-top: 15px;
-      border-left: 4px solid #0066cc;
+      border-left: 5px solid #0066cc;
       font-size: 14px;
       color: #004085;
+      line-height: 1.7;
     }
 
-    .footer {
-      background: #2a5298;
+    .footer-card {
+      background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
       color: white;
-      padding: 30px;
+      padding: 40px;
       text-align: right;
+      border-radius: 20px;
       margin-top: 40px;
+      box-shadow: 0 10px 30px rgba(42, 82, 152, 0.4);
     }
 
     .footer-title {
       font-size: 18px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
-    strong {
-      color: #667eea;
-      font-weight: 700;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        padding: 20px;
-      }
-      
-      .header h1 {
-        font-size: 22px;
-      }
-
-      .banner h2 {
-        font-size: 20px;
-      }
-
-      .price-table th, .price-table td {
-        padding: 12px 8px;
-        font-size: 13px;
-      }
+    .next-button-container {
+      text-align: center;
+      padding: 40px 0 20px 0;
     }
 
     .next-button {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 16px 40px;
+      padding: 18px 50px;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
       transition: all 0.3s ease;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .next-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .next-button:hover::before {
+      left: 100%;
     }
 
     .next-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.7);
     }
 
     .next-button:active {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .next-button svg {
@@ -288,150 +489,257 @@
     }
 
     .next-button:hover svg {
-      transform: translateX(5px);
+      transform: translateX(8px);
+    }
+
+    @media (max-width: 768px) {
+      .header-card, .content-card {
+        padding: 30px 20px;
+      }
+
+      .main-title {
+        font-size: 24px;
+      }
+
+      .banner-title {
+        font-size: 22px;
+      }
+
+      .price-table th, .price-table td {
+        padding: 12px;
+        font-size: 13px;
+      }
+
+      .requirement-number {
+        min-width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+    }
+
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .shape1 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      top: 10%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .shape2 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      bottom: 15%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+
+    .shape3 {
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      top: 50%;
+      right: 5%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(50px, 50px) rotate(90deg); }
+      50% { transform: translate(0, 100px) rotate(180deg); }
+      75% { transform: translate(-50px, 50px) rotate(270deg); }
     }
   </style>
 </head>
 <body>
+  <div class="floating-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+
   <div class="container">
-    <div class="header">
-      <div class="arabic">مجلس دائرة ڤڠكالن هولو</div>
-      <h1>Majlis Daerah Pengkalan Hulu</h1>
-      <div class="address">
-        Wisma Kroh, Jalan Sri Adika Raja<br>
-        33100 Pengkalan Hulu<br>
-        PERAK DARUL RIDZUAN
+    <div class="header-card">
+      <div class="logo-container">
+        <div class="logo-wrapper">
+          <div class="logo-circle">
+            <div class="logo-inner">
+              <img src="https://drive.google.com/thumbnail?id=1gkq2KUDeSahQT9db8KgIs6HtDotaeao1&sz=w200" alt="Logo MDPH">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-text">
+        <div class="arabic-text">مجلس دائرة ڤڠكالن هولو</div>
+        <h1 class="main-title">Majlis Daerah Pengkalan Hulu</h1>
+        <div class="address">
+          Wisma Kroh, Jalan Sri Adika Raja<br>
+          33100 Pengkalan Hulu<br>
+          PERAK DARUL RIDZUAN
+        </div>
       </div>
     </div>
 
-    <div class="banner">
-      <h2>Pendaftaran Kontraktor Awam</h2>
-      <h3>Bangunan Bagi Tahun 2025</h3>
+    <div class="banner-card">
+      <h2 class="banner-title">Pendaftaran Kontraktor Awam</h2>
+      <h3 class="banner-subtitle">Bangunan Bagi Tahun 2026</h3>
     </div>
 
-    <div class="content">
-      <div class="intro">
+    <div class="content-card">
+      <div class="intro-box">
         <p>
-          Adalah dipelawa kontraktor-kontraktor <strong>BUMIPUTERA</strong> yang berdaftar
+          Adalah dipelawa kontraktor-kontraktor <span class="strong-text">BUMIPUTERA</span> yang berdaftar
           dengan Lembaga Pembangunan Industri Pembinaan (CIDB) dan Pusat Khidmat
           Kontraktor (PKK) dalam kelas dan jenis pendaftaran yang berkaitan dan yang
           masih membuat tawaran buat masa ini untuk berdaftar dengan Majlis Daerah
-          Pengkalan Hulu untuk tempoh <span class="date-highlight">6 Januari 2025 HINGGA 30 Jun 2025</span>.
+          Pengkalan Hulu untuk tempoh <span class="highlight">6 Januari 2025 HINGGA 30 Jun 2026</span>.
         </p>
       </div>
 
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th style="width: 10%">BIL</th>
-            <th style="width: 40%">PERKARA</th>
-            <th style="width: 25%">KELAS</th>
-            <th style="width: 25%">HARGA</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td rowspan="5">1.</td>
-            <td rowspan="5" style="text-align: left; font-weight: 600;">PENDAFTARAN KONTRAKTOR</td>
-            <td class="grade">GRED G1</td>
-            <td class="price">RM 50.00</td>
-          </tr>
-          <tr>
-            <td class="grade">GRED G2</td>
-            <td class="price">RM 75.00</td>
-          </tr>
-          <tr>
-            <td class="grade">GRED G3</td>
-            <td class="price">RM 100.00</td>
-          </tr>
-          <tr>
-            <td class="grade">GRED G4 / G5</td>
-            <td class="price">RM 150.00</td>
-          </tr>
-          <tr>
-            <td class="grade">GRED G6 / G7</td>
-            <td class="price">RM 250.00</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th style="width: 10%">BIL</th>
+              <th style="width: 40%">PERKARA</th>
+              <th style="width: 25%">KELAS</th>
+              <th style="width: 25%">HARGA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="5">1.</td>
+              <td rowspan="5" style="font-weight: 600;">PENDAFTARAN KONTRAKTOR</td>
+              <td class="grade-cell">GRED G1</td>
+              <td class="price-cell">RM 50.00</td>
+            </tr>
+            <tr>
+              <td class="grade-cell">GRED G2</td>
+              <td class="price-cell">RM 75.00</td>
+            </tr>
+            <tr>
+              <td class="grade-cell">GRED G3</td>
+              <td class="price-cell">RM 100.00</td>
+            </tr>
+            <tr>
+              <td class="grade-cell">GRED G4 / G5</td>
+              <td class="price-cell">RM 150.00</td>
+            </tr>
+            <tr>
+              <td class="grade-cell">GRED G6 / G7</td>
+              <td class="price-cell">RM 250.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <div class="requirements">
-        <div class="requirement-item">
-          <span class="requirement-number">1</span>
-          <div class="requirement-content">
-            <p>Untuk maksud ini kontraktor-kontraktor yang ingin membuat pendaftaran <strong>DIWAJIBKAN</strong> membawa:</p>
-            <div class="doc-list">
-              <div class="doc-item">Perakuan Pendaftaran Atau Kad Perakuan Permohonan Pendaftaran Lembaga Pembangunan Industri Pembinaan Malaysia (CIDB)</div>
-              <div class="doc-item">Sijil Pendaftar Asal Pusat Khidmat Kontraktor (PKK)</div>
-              <div class="doc-item">Sijil Pengiktirafan Taraf Bumiputera</div>
-              <div class="doc-item">Sijil Suruhanjaya Syarikat Malaysia (SSM)</div>
-              <div class="doc-item">Sijil Pendaftaran Kementerian Kewangan (Jika Ada)</div>
-              <div class="doc-item">Lain-Lain Sijil</div>
-              <div class="doc-item">Gambar Pemilik Berukuran Passport</div>
-              <div class="doc-item">Cop Rasmi Syarikat</div>
+      <div class="requirement-section">
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">1</div>
+            <div class="requirement-content">
+              <p>Untuk maksud ini kontraktor-kontraktor yang ingin membuat pendaftaran <span class="strong-text">DIWAJIBKAN</span> membawa:</p>
+              <div class="doc-list">
+                <div class="doc-item">Perakuan Pendaftaran Atau Kad Perakuan Permohonan Pendaftaran Lembaga Pembangunan Industri Pembinaan Malaysia (CIDB)</div>
+                <div class="doc-item">Sijil Pendaftar Asal Pusat Khidmat Kontraktor (PKK)</div>
+                <div class="doc-item">Sijil Pengiktirafan Taraf Bumiputera</div>
+                <div class="doc-item">Sijil Suruhanjaya Syarikat Malaysia (SSM)</div>
+                <div class="doc-item">Sijil Pendaftaran Kementerian Kewangan (Jika Ada)</div>
+                <div class="doc-item">Lain-Lain Sijil</div>
+                <div class="doc-item">Gambar Pemilik Berukuran Passport</div>
+                <div class="doc-item">Cop Rasmi Syarikat</div>
+              </div>
+              <div class="note-box">
+                Salinan-salinan perakuan dan sijil yang berkenaan boleh diterima jika
+                disahkan oleh pejabat yang mengeluarkannya dan sijil dari Majlis Daerah
+                Pengkalan Hulu.
+              </div>
             </div>
-            <div class="note">
-              Salinan-salinan perakuan dan sijil yang berkenaan boleh diterima jika
-              disahkan oleh pejabat yang mengeluarkannya dan sijil dari Majlis Daerah
-              Pengkalan Hulu.
+          </div>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">2</div>
+            <div class="requirement-content">
+              <p>Pendaftaran boleh dibuat jam <span class="strong-text">8.00 pagi hingga 4.00 petang</span>
+              dan pada hari jumaat jam <span class="strong-text">8.00 pagi hingga 3.30 petang</span>
+              semasa waktu pejabat di kaunter Jabatan Kejuruteraan
+              Majlis Daerah Pengkalan Hulu.</p>
             </div>
           </div>
         </div>
 
-        <div class="requirement-item">
-          <span class="requirement-number">2</span>
-          <div class="requirement-content">
-            <p>Pendaftaran boleh dibuat jam <strong>8.00 pagi hingga 4.00 petang</strong>
-            dan pada hari jumaat jam <strong>8.00 pagi hingga 3.30 petang</strong>
-            semasa waktu pejabat di kaunter Jabatan Kejuruteraan
-            Majlis Daerah Pengkalan Hulu.</p>
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">3</div>
+            <div class="requirement-content">
+              <p>Bayaran bagi pendaftaran tersebut hendaklah dibuat dalam Ringgit Malaysia
+              dan <span class="strong-text">dalam bentuk Pembayaran atas talian sahaja</span>.</p>
+            </div>
           </div>
         </div>
 
-        <div class="requirement-item">
-          <span class="requirement-number">3</span>
-          <div class="requirement-content">
-            <p>Bayaran bagi pendaftaran tersebut hendaklah dibuat dalam Ringgit Malaysia
-            dan <strong>dalam bentuk Pembayaran atas talian sahaja</strong>.</p>
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">4</div>
+            <div class="requirement-content">
+              <p>Sebarang rayuan untuk mendaftar selepas daripada tempoh tersebut
+              tidak akan dilayan.</p>
+            </div>
           </div>
         </div>
 
-        <div class="requirement-item">
-          <span class="requirement-number">4</span>
-          <div class="requirement-content">
-            <p>Sebarang rayuan untuk mendaftar selepas daripada tempoh tersebut
-            tidak akan dilayan.</p>
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">5</div>
+            <div class="requirement-content">
+              <p>Hanya kontraktor yang berdaftar sahaja akan diberikan pertimbangan
+              ke atas pemberian kerja-kerja sebut harga dan kerja-kerja kecil
+              yang dikeluarkan oleh majlis.</p>
+            </div>
           </div>
         </div>
 
-        <div class="requirement-item">
-          <span class="requirement-number">5</span>
-          <div class="requirement-content">
-            <p>Hanya kontraktor yang berdaftar sahaja akan diberikan pertimbangan
-            ke atas pemberian kerja-kerja sebut harga dan kerja-kerja kecil
-            yang dikeluarkan oleh majlis.</p>
-          </div>
-        </div>
-
-        <div class="requirement-item">
-          <span class="requirement-number">6</span>
-          <div class="requirement-content">
-            <p>Sebarang permohonan yang tidak mengikut kriteria yang dikehendaki /
-            tidak lengkap akan mengakibatkan pendaftaran tuan/puan akan ditolak.</p>
+        <div class="requirement-card">
+          <div class="requirement-header">
+            <div class="requirement-number">6</div>
+            <div class="requirement-content">
+              <p>Sebarang permohonan yang tidak mengikut kriteria yang dikehendaki /
+              tidak lengkap akan mengakibatkan pendaftaran tuan/puan akan ditolak.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="footer">
+      <div class="footer-card">
         <div class="footer-title">Arahan</div>
         <div class="footer-title">Yang Dipertua</div>
         <div class="footer-title">Majlis Daerah Pengkalan Hulu</div>
       </div>
 
-      <div style="text-align: center; padding: 30px 0 20px 0;">
+      <div class="next-button-container">
         <a href="page2.html" class="next-button">
           <span>Seterusnya</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </a>
