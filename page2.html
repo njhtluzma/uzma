@@ -844,95 +844,103 @@
 
         <h6 class="mt-4 fw-bold">Maklumat CIDB</h6>
 
-        <div class="row mt-3">
-          <div class="col-md-4 mb-3">
-            <label class="form-label">No. Pendaftaran<span class="required-star">*</span></label>
-            <input type="text" class="form-control" name="cidb_no_pendaftaran" required>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Tarikh Daftar<span class="required-star">*</span></label>
-            <input type="date" class="form-control" name="cidb_tarikh_daftar" required>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Tarikh Tamat<span class="required-star">*</span></label>
-            <input type="date" class="form-control" name="cidb_tarikh_tamat" required>
-          </div>
-        </div>
+<div class="row mt-3">
+  <div class="col-md-4 mb-3">
+    <label class="form-label">No. Pendaftaran<span class="required-star">*</span></label>
+    <input type="text" class="form-control" name="cidb_no_pendaftaran" required>
+  </div>
+  <div class="col-md-4 mb-3">
+    <label class="form-label">Tarikh Daftar<span class="required-star">*</span></label>
+    <input type="date" class="form-control" name="cidb_tarikh_daftar" required>
+  </div>
+  <div class="col-md-4 mb-3">
+    <label class="form-label">Tarikh Tamat<span class="required-star">*</span></label>
+    <input type="date" class="form-control" name="cidb_tarikh_tamat" required>
+  </div>
+</div>
 
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr class="text-center">
-                <th>Pilih</th>
-                <th>Kelas</th>
-                <th>Harga (RM)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="text-center">
-                <td><input type="radio" name="cidb_gred" value="G1|50" required></td>
-                <td>GRED G1</td>
-                <td>50.00</td>
-              </tr>
-              <tr class="text-center">
-                <td><input type="radio" name="cidb_gred" value="G2|75"></td>
-                <td>GRED G2</td>
-                <td>75.00</td>
-              </tr>
-              <tr class="text-center">
-                <td><input type="radio" name="cidb_gred" value="G3|100"></td>
-                <td>GRED G3</td>
-                <td>100.00</td>
-              </tr>
-              <tr class="text-center">
-                <td><input type="radio" name="cidb_gred" value="G4/G5|150"></td>
-                <td>GRED G4/G5</td>
-                <td>150.00</td>
-              </tr>
-              <tr class="text-center">
-                <td><input type="radio" name="cidb_gred" value="G6/G7|250"></td>
-                <td>GRED G6/G7</td>
-                <td>250.00</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="mb-4 file-upload-wrapper">
-          <label class="form-label">Dokumen CIDB<span class="required-star">*</span> <small>(Max 4)</small></label>
-          <input type="file" class="form-control" id="dokumenCIDB" multiple accept=".pdf,.jpg,.jpeg,.png" required>
-        </div>
+<!-- 🔽 JADUAL BARU MAKLUMAT CIDB -->
+<div class="table-responsive mt-3">
+  <table class="table table-bordered">
+    <thead class="text-center">
+      <tr>
+        <th>No</th>
+        <th>Gred</th>
+        <th>Kategori</th>
+        <th>Kod Pengkhususan</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="cidbBody">
+      <tr>
+        <td class="text-center bil">1</td>
+        <td>
+          <select class="form-select" name="cidb_gred[]" required>
+            <option value="">Sila Pilih</option>
+            <option value="G1">G1 (200,000.00 dan ke bawah)</option>
+            <option value="G2">G2 (200,001.00 hingga 500,000.00)</option>
+            <option value="G3">G3 (500,001.00 hingga 1,000,000.00)</option>
+            <option value="G4">G4 (1,000,001.00 hingga 3,000,000.00)</option>
+            <option value="G5">G5 (3,000,001.00 hingga 5,000,000.00)</option>
+            <option value="G6">G6 (5,000,001.00 hingga 10,000,000.00)</option>
+            <option value="G7">G7 (10,000,001.00 dan ke atas)</option>
+          </select>
+        </td>
+        <td>
+          <select class="form-select" name="cidb_kategori[]" required>
+            <option value="">Sila Pilih</option>
+            <option value="CE">CE – Kejuruteraan Awam</option>
+            <option value="B">B – Bangunan</option>
+            <option value="ME">ME – Mekanikal & Elektrikal</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" class="form-control" name="cidb_pengkhususan[]" placeholder="Contoh: CE01, B04">
+        </td>
+        <td class="text-center">
+          <button type="button" class="btn btn-success btn-sm" onclick="addCIDBRow()">+</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
         <!-- Bahagian Pembayaran -->
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-          </svg>
-          Maklumat Pembayaran
-        </div>
+		<div class="section-title">
+		  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+		  </svg>
+		  Maklumat Pembayaran
+		</div>
 
-        <div class="alert alert-info">
-          <strong>🏦 Pembayaran Secara Atas Talian Sahaja</strong><br><br>
-          <table class="table table-borderless mb-0">
-            <tr>
-              <td width="35%"><strong>Nama Akaun</strong></td>
-              <td>: MAJLIS DAERAH PENGKALAN HULU</td>
-            </tr>
-            <tr>
-              <td><strong>No. Akaun</strong></td>
-              <td>: 1234 5678 9012</td>
-            </tr>
-            <tr>
-              <td><strong>Nama Bank</strong></td>
-              <td>: MAYBANK</td>
-            </tr>
-          </table>
-          <hr>
-          <small class="text-danger">
-            ⚠️ Sila buat bayaran mengikut Gred CIDB yang dipilih dan muat naik bukti pembayaran.
-            Permohonan tanpa bayaran tidak akan diproses.
-          </small>
-        </div>
+		<div class="alert alert-info">
+		  <strong>🏦 Pembayaran Secara Atas Talian Sahaja</strong><br><br>
+
+		  <table class="table table-borderless mb-0">
+			<tr>
+			  <td width="35%"><strong>Nama Akaun</strong></td>
+			  <td>: MAJLIS DAERAH PENGKALAN HULU</td>
+			</tr>
+			<tr>
+			  <td><strong>Pautan Pembayaran</strong></td>
+			  <td>
+				: <a href="https://www.maybank2u.com.my/home/m2u/common/login.do"
+					 target="_blank"
+					 class="fw-bold text-primary text-decoration-none">
+					Klik Di Sini Untuk Pembayaran
+				  </a>
+			  </td>
+			</tr>
+		  </table>
+
+		  <hr>
+
+		  <small class="text-danger">
+			⚠️ Sila buat bayaran mengikut Gred CIDB yang dipilih dan muat naik bukti pembayaran.
+			Permohonan tanpa bayaran tidak akan diproses.
+		  </small>
+		</div>
+
 
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -1010,6 +1018,50 @@ function addDirectorRow() {
 function removeDirectorRow(btn) {
   btn.closest("tr").remove();
   document.querySelectorAll(".bil").forEach((el, i) => el.innerText = i + 1);
+}
+
+function addCIDBRow() {
+  const tbody = document.getElementById("cidbBody");
+  const rowCount = tbody.rows.length + 1;
+
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td class="text-center bil">${rowCount}</td>
+    <td>
+      <select class="form-select" name="cidb_gred[]" required>
+        <option value="">Sila Pilih</option>
+        <option value="G1">G1 (200,000.00 dan ke bawah)</option>
+        <option value="G2">G2 (200,001.00 hingga 500,000.00)</option>
+        <option value="G3">G3 (500,001.00 hingga 1,000,000.00)</option>
+        <option value="G4">G4 (1,000,001.00 hingga 3,000,000.00)</option>
+        <option value="G5">G5 (3,000,001.00 hingga 5,000,000.00)</option>
+        <option value="G6">G6 (5,000,001.00 hingga 10,000,000.00)</option>
+        <option value="G7">G7 (10,000,001.00 dan ke atas)</option>
+      </select>
+    </td>
+    <td>
+      <select class="form-select" name="cidb_kategori[]" required>
+        <option value="">Sila Pilih</option>
+        <option value="CE">CE – Kejuruteraan Awam</option>
+        <option value="B">B – Bangunan</option>
+        <option value="ME">ME – Mekanikal & Elektrikal</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" class="form-control" name="cidb_pengkhususan[]" placeholder="Contoh: CE01, B04">
+    </td>
+    <td class="text-center">
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeCIDBRow(this)">−</button>
+    </td>
+  `;
+  tbody.appendChild(row);
+}
+
+function removeCIDBRow(btn) {
+  btn.closest("tr").remove();
+  document.querySelectorAll("#cidbBody .bil").forEach((el, i) => {
+    el.innerText = i + 1;
+  });
 }
 
 async function convertFileToBase64(file) {
@@ -1154,3 +1206,4 @@ document.getElementById("myForm").addEventListener("submit", async function(e) {
 
 </body>
 </html>
+
