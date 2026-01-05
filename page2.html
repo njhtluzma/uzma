@@ -705,7 +705,7 @@
 
         <div class="mb-4">
           <label class="form-label">Alamat E-mel</label>
-          <input name="emel" type="email" class="form-control" placeholder="nama@gmail.com" required>
+          <input name="emel" type="email" class="form-control" placeholder="nama@gmail.com">
         </div>
 
         <!-- Bahagian 4: Maklumat Pengarah / Pemilik -->
@@ -804,7 +804,8 @@
 
         <div class="mb-4 file-upload-wrapper">
           <label class="form-label">Dokumen SSM<span class="required-star">*</span> <small>(Max 4)</small></label>
-          <input type="file" class="form-control" id="dokumenSSM" multiple accept=".pdf,.jpg,.jpeg,.png" required>
+          <input type="file" class="form-control" id="dokumenSSM" multiple accept=".pdf,.jpg,.jpeg,.png" required >
+		  <small class="text-muted" id="ssmCount">Tiada fail dipilih</small>
         </div>
 
         <div class="border rounded p-3 bg-light mb-4">
@@ -899,7 +900,8 @@
 
 		<div class="mb-4 file-upload-wrapper">
           <label class="form-label">Dokumen CIDB<span class="required-star">*</span> <small>(Max 4)</small></label>
-          <input type="file" class="form-control" id="dokumenSSM" multiple accept=".pdf,.jpg,.jpeg,.png" required>
+          <input type="file" class="form-control" id="dokumenCIDB" multiple accept=".pdf,.jpg,.jpeg,.png" required>
+		  <small class="text-muted" id="cidbCount">Tiada fail dipilih</small>
         </div>
 
         <!-- Bahagian Pembayaran -->
@@ -1000,6 +1002,70 @@
         <strong>✗ Ralat!</strong> <span id="errorText">Sila cuba lagi.</span>
       </div>
 
+	<!-- 🔐 HALAMAN PENGESAHAN (SELEPAS HANTAR) -->
+	<div id="confirmationPage" class="d-none mt-4">
+
+	  <div class="section-title">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        Pengesahan Maklumat Kontraktor
+      </div>
+
+      <div class="border rounded p-4 mb-4" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);">
+        
+        <div class="alert alert-info mb-4" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); border-left: 5px solid #667eea;">
+          <strong>📋 Nota Penting:</strong> Sila sahkan maklumat anda dengan lengkap sebelum menghantar permohonan.
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Nama Penuh Pengesahan<span class="required-star">*</span></label>
+          <input type="text" id="sahNama" class="form-control" placeholder="Nama Penuh Seperti Dalam Kad Pengenalan" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">No. Kad Pengenalan<span class="required-star">*</span></label>
+          <input type="text" id="sahIC" class="form-control" placeholder="Contoh: 900101-01-1234" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Nama Syarikat<span class="required-star">*</span></label>
+          <input type="text" id="sahSyarikat" class="form-control" placeholder="Nama Syarikat Yang Didaftarkan" required readonly>
+        </div>
+
+   
+
+        <div class="form-check mb-4" style="padding: 20px; background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(220, 53, 69, 0.1) 100%); border-radius: 15px; border: 2px solid rgba(245, 87, 108, 0.3);">
+          <input class="form-check-input" type="checkbox" id="agreeFinal" required style="width: 24px; height: 24px; margin-top: 4px;">
+          <label class="form-check-label" for="agreeFinal" style="margin-left: 15px; font-weight: 600; color: #2c3e50;">
+            Saya mengesahkan bahawa semua maklumat yang diberikan adalah tepat dan saya bertanggungjawab sepenuhnya terhadap ketepatan maklumat tersebut. Sekiranya maklumat yang diberikan tidak benar, saya bersetuju bahawa permohonan saya boleh ditolak atau pendaftaran boleh ditamatkan dengan serta merta.
+          </label>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-submit" onclick="finalSubmit()" style="min-width: 300px;">
+            <span id="finalBtnText">Sah & Hantar Permohonan</span>
+            <span id="finalSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Success Message After Final Submit -->
+      <div id="finalSuccessMsg" class="alert alert-success d-none mt-4">
+        <h5 class="fw-bold mb-3">✓ Permohonan Berjaya Dihantar!</h5>
+        <p class="mb-2">Terima kasih, <strong id="successNama"></strong>!</p>
+        <p class="mb-0">Permohonan pendaftaran syarikat <strong id="successSyarikat"></strong> telah berjaya dihantar dan sedang diproses oleh pihak Majlis Daerah Pengkalan Hulu.</p>
+        <hr class="my-3">
+      </div>
+
+      <!-- Error Message -->
+      <div id="finalErrorMsg" class="alert alert-danger d-none mt-4">
+        <strong>✗ Ralat!</strong> <span id="finalErrorText">Sila cuba lagi.</span>
+      </div>
+
+	</div>
+
     </div>
 
     <div class="footer-text">
@@ -1091,6 +1157,48 @@ async function convertFileToBase64(file) {
   });
 }
 
+
+function updateFileCount(inputId, textId, label) {
+  const input = document.getElementById(inputId);
+  const text = document.getElementById(textId);
+
+  input.addEventListener("change", function () {
+    const count = this.files.length;
+
+    if (count === 0) {
+      text.textContent = "Tiada fail dipilih";
+    } else if (count === 1) {
+      text.textContent = `1 fail ${label} telah dimuat naik`;
+    } else {
+      text.textContent = `${count} fail ${label} telah dimuat naik`;
+    }
+  });
+}
+
+// Dokumen SSM
+updateFileCount("dokumenSSM", "ssmCount", "SSM");
+
+// Dokumen CIDB
+updateFileCount("dokumenCIDB", "cidbCount", "CIDB");
+
+
+function finalSubmit() {
+  const nama = document.getElementById("sahNama").value.trim();
+  const ic = document.getElementById("sahIC").value.trim();
+  const syarikat = document.getElementById("sahSyarikat").value.trim();
+
+  if (!nama || !ic || !syarikat) {
+    alert("Sila lengkapkan semua maklumat pengesahan.");
+    return;
+  }
+
+  alert("✅ Pengesahan berjaya. Permohonan telah disahkan.");
+
+  // OPTIONAL: redirect ke halaman tamat
+  // window.location.href = "terima-kasih.html";
+}
+
+
 // Auto calculate payment amount
 document.getElementById("cidbGred").addEventListener("change", function () {
   const selectedOption = this.options[this.selectedIndex];
@@ -1134,7 +1242,7 @@ document.getElementById("myForm").addEventListener("submit", async function(e) {
         payload[key] = value;
       }
     }
-
+	
     const passportInput = document.getElementById("passport");
     const passportFile = passportInput.files[0];
     
@@ -1201,11 +1309,20 @@ document.getElementById("myForm").addEventListener("submit", async function(e) {
     const result = await response.json();
 
     if (result.status === "success") {
-      successMsg.classList.remove("d-none");
-      this.reset();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => successMsg.classList.add("d-none"), 5000);
-    } else {
+
+  // Sembunyikan borang
+  document.getElementById("myForm").classList.add("d-none");
+
+  // Isi auto nama syarikat
+  document.getElementById("sahSyarikat").value =
+    document.querySelector('input[name="nama_syarikat"]').value || "";
+
+  // Papar halaman pengesahan
+  document.getElementById("confirmationPage").classList.remove("d-none");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+ else {
       throw new Error(result.message || "Ralat tidak diketahui");
     }
 
